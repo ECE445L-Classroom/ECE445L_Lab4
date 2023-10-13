@@ -62,7 +62,8 @@ UART_t _enableFaultState(void) {
 
     /* This delay is required to get the TM4C running. If this is not included,
        then there's a 60% chance that the UART debug output is garbage. */
-    for (uint32_t i = 0; i < 100000; ++i ){ uint8_t j = 0; }
+    uint32_t i;
+    for (i = 0; i < 100000; ++i ){ uint8_t j = 0; }
 
     return uart;
 }
@@ -119,8 +120,10 @@ void _ReportHardFault(uint32_t *stackFrame, uint32_t _exc) {
 
     #define BUFFER_SIZE 18
     char buffer[BUFFER_SIZE] = { '\0' };
-    for (uint8_t i = 0; i < NUM_FRAMES; ++i) {
-        for (uint8_t j = 0; j < BUFFER_SIZE; ++j) {
+    uint8_t i;
+    for (i = 0; i < NUM_FRAMES; ++i) {
+        uint8_t j;
+        for (j = 0; j < BUFFER_SIZE; ++j) {
             buffer[j] = '\0';
         }
         /* Print parameter value at hardfault. */
